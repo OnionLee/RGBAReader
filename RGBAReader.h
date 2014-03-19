@@ -9,6 +9,7 @@ struct sRGBA
 	int b;
 	int a;
 };
+
 class RGBAReader
 {
 public:
@@ -18,15 +19,11 @@ public:
 	sRGBA getRGBAwithPos(int x, int y);
 	sRGBA * getRGBAwithRect(int x, int y, int w, int h);
 
-	sRGBA * getPixels() const { return m_pPixels; }
-	int getPixelSize() const { return m_nPixelSize; }
-	
-	//다쓰면꼭 호출해주세요.
-	void end();
-private:
-	sRGBA * m_pPixels;
-
-	int m_nPixelSize;
-
+	static RGBAReader* GetInstance()
+	{
+		static RGBAReader* inst = new RGBAReader;
+		return inst;
+	}
 };
 
+#define SCENE_PIXEL_BYTELOAD RGBAReader::GetInstance()
