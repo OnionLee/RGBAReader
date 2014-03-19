@@ -3,17 +3,15 @@
 
 RGBAReader::RGBAReader()
 {
-	m_pPixels = new sRGBA;
 }
 
 
 RGBAReader::~RGBAReader()
 {
-	delete []m_pPixels;
 }
 
 
-sRGBA RGBAReader::getRGBAwithPos(int x, int y)
+sRGBA RGBAReader::getRGBAwithPos(sRGBA &temp, int x, int y)
 {
 	BYTE m_bRawdata[4];
 
@@ -27,8 +25,6 @@ sRGBA RGBAReader::getRGBAwithPos(int x, int y)
 		GL_UNSIGNED_BYTE,
 		m_bRawdata);
 
-	sRGBA temp;
-
 	temp.r = (int)m_bRawdata[0];
 	temp.g = (int)m_bRawdata[1];
 	temp.b = (int)m_bRawdata[2];
@@ -38,7 +34,7 @@ sRGBA RGBAReader::getRGBAwithPos(int x, int y)
 }
 
 
-sRGBA * RGBAReader::getRGBAwithRect(int x, int y, int w, int h)
+sRGBA * RGBAReader::getRGBAwithRect(sRGBA* m_pPixels, int x, int y, int w, int h)
 {
 	BYTE * m_bRawdata = new BYTE[w * h * 4];
 	
@@ -51,8 +47,6 @@ sRGBA * RGBAReader::getRGBAwithRect(int x, int y, int w, int h)
 		GL_UNSIGNED_BYTE,
 		m_bRawdata);
 
-	delete []m_pPixels;
-	m_pPixels = new sRGBA[w * h];
 	int m_nPixelSize = w * h;
 	for (int i = 0; i < w * h; i++)
 	{
