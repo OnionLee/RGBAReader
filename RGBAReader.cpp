@@ -1,9 +1,7 @@
 #include "RGBAReader.h"
 
 
-RGBAReader::RGBAReader():
-m_nPixelSize(0),
-m_pPixels(NULL)
+RGBAReader::RGBAReader()
 {
 }
 
@@ -51,8 +49,8 @@ sRGBA * RGBAReader::getRGBAwithRect(int x, int y, int w, int h)
 		GL_UNSIGNED_BYTE,
 		m_bRawdata);
 
-	m_pPixels = new sRGBA[w * h];
-	m_nPixelSize = w * h;
+	sRGBA *m_pPixels = new sRGBA[w * h];
+	int m_nPixelSize = w * h;
 	for (int i = 0; i < w * h; i++)
 	{
 		int offset = i * 4;
@@ -65,11 +63,4 @@ sRGBA * RGBAReader::getRGBAwithRect(int x, int y, int w, int h)
 	delete m_bRawdata;
 
 	return m_pPixels;
-}
-
-void RGBAReader::end()
-{
-	delete m_pPixels;
-	m_nPixelSize = 0;
-	m_pPixels = 0;
 }
