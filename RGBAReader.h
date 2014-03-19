@@ -24,6 +24,9 @@ public:
 		static RGBAReader* inst = new RGBAReader;
 		return inst;
 	}
+
+private:
+	sRGBA *m_pPixels;
 };
 
 #define SCENE_PIXEL_BYTELOAD RGBAReader::GetInstance()

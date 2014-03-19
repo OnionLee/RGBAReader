@@ -3,11 +3,13 @@
 
 RGBAReader::RGBAReader()
 {
+	m_pPixels = new sRGBA;
 }
 
 
 RGBAReader::~RGBAReader()
 {
+	delete []m_pPixels;
 }
 
 
@@ -49,7 +51,8 @@ sRGBA * RGBAReader::getRGBAwithRect(int x, int y, int w, int h)
 		GL_UNSIGNED_BYTE,
 		m_bRawdata);
 
-	sRGBA *m_pPixels = new sRGBA[w * h];
+	delete []m_pPixels;
+	m_pPixels = new sRGBA[w * h];
 	int m_nPixelSize = w * h;
 	for (int i = 0; i < w * h; i++)
 	{
